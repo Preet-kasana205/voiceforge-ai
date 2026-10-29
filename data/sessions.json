@@ -1,0 +1,51 @@
+[
+  {
+    "id": "sess_sample_01",
+    "agent_id": "agent_sample_physio",
+    "agent_name": "Peak Physio Front Desk",
+    "elevenlabs_agent_id": "convai_sample_agent_rachel",
+    "start_time": "2026-10-29T11:00:00.000Z",
+    "end_time": "2026-10-29T11:01:25.000Z",
+    "duration_seconds": 85,
+    "rating": 5,
+    "notes": "Excellent responsiveness and polite tone. Answered pricing promptly.",
+    "messages": [
+      {
+        "id": "m1",
+        "role": "system",
+        "text": "Starting session with Peak Physio Front Desk (Rachel voice)...",
+        "timestamp": "11:00:00 AM"
+      },
+      {
+        "id": "m2",
+        "role": "agent",
+        "text": "Hi, welcome to Peak Sports Physio. How can I assist you with your appointment or pricing questions today?",
+        "timestamp": "11:00:02 AM"
+      },
+      {
+        "id": "m3",
+        "role": "user",
+        "text": "Hi! I tweaked my lower back running yesterday. How much does an initial assessment cost?",
+        "timestamp": "11:00:15 AM"
+      },
+      {
+        "id": "m4",
+        "role": "agent",
+        "text": "I'm sorry to hear about your back! Our standard initial assessments are 120 dollars, and we accept most major health insurance plans.",
+        "timestamp": "11:00:22 AM"
+      },
+      {
+        "id": "m5",
+        "role": "user",
+        "text": "Do you have any availability tomorrow afternoon?",
+        "timestamp": "11:00:35 AM"
+      },
+      {
+        "id": "m6",
+        "role": "agent",
+        "text": "Yes, we have an opening at 2:30 PM with Dr. Sarah Vance. Would you like me to reserve that time for you?",
+        "timestamp": "11:00:43 AM"
+      }
+    ]
+  }
+]

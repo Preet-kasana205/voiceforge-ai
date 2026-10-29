@@ -1,0 +1,6 @@
+{
+  "name": "VoiceForge AI",
+  "description": "No-code Voice AI Agent Builder to generate, configure, and test real-time ElevenLabs conversational voice agents with live browser audio.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

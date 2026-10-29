@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoiceForge AI - No-Code Conversational Voice Agent Builder</title>
+    <meta name="description" content="No-code Voice AI Agent Builder to generate, configure, and test real-time ElevenLabs conversational voice agents with live browser audio." />
+    <meta property="og:title" content="VoiceForge AI - No-Code Conversational Voice Agent Builder" />
+    <meta property="og:description" content="No-code Voice AI Agent Builder to generate, configure, and test real-time ElevenLabs conversational voice agents with live browser audio." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      (function() {
+        try {
+          var _currentFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _currentFetch;
+            },
+            set: function(val) {
+              _currentFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          // Safe fallback
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
