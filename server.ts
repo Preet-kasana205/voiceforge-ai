@@ -40,11 +40,7 @@ function readJsonFile<T>(filePath: string, fallback: T): T {
 }
 
 function writeJsonFile<T>(filePath: string, data: T): void {
-  try {
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-  } catch (err) {
-    console.error(`Error writing ${filePath}:`, err);
-  }
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
 }
 
 // Curated default ElevenLabs voices for conversational agents
@@ -519,19 +515,22 @@ app.post('/api/agents', (req, res) => {
   const agents = readJsonFile<any[]>(AGENTS_FILE, []);
   const index = agents.findIndex((a) => a.id === agent.id);
 
+  let savedAgent: any;
   if (index !== -1) {
     agents[index] = { ...agents[index], ...agent, updated_at: new Date().toISOString() };
+    savedAgent = agents[index];
   } else {
-    agents.unshift({
+    savedAgent = {
       ...agent,
       id: agent.id || `agent_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
       created_at: agent.created_at || new Date().toISOString(),
       updated_at: new Date().toISOString(),
-    });
+    };
+    agents.unshift(savedAgent);
   }
 
   writeJsonFile(AGENTS_FILE, agents);
-  res.json({ agent: agents[index !== -1 ? index : 0] });
+  res.json({ agent: savedAgent });
 });
 
 app.delete('/api/agents/:id', (req, res) => {
@@ -561,8 +560,14 @@ app.post('/api/sessions', (req, res) => {
     created_at: new Date().toISOString(),
   };
 
-  sessions.unshift(newSession);
-  writeJsonFile(SESSIONS_FILE, sessions);
+  try {
+    sessions.unshift(newSession);
+    writeJsonFile(SESSIONS_FILE, sessions);
+  } catch (err: any) {
+    console.error('Failed to persist session:', err);
+    return res.status(500).json({ error: `Session could not be saved: ${err.message || 'Disk write failed'}` });
+  }
+
   res.json({ session: newSession });
 });
 

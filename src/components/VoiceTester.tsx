@@ -52,6 +52,7 @@ export const VoiceTester: React.FC<VoiceTesterProps> = ({
   const [notes, setNotes] = useState<string>('');
   const [isSavingSession, setIsSavingSession] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   // References for live session
   const conversationRef = useRef<any>(null);
@@ -196,6 +197,7 @@ export const VoiceTester: React.FC<VoiceTesterProps> = ({
   const handleSaveSession = async () => {
     try {
       setIsSavingSession(true);
+      setSaveError(null);
       const saved = await saveSession({
         agent_id: agent.id,
         agent_name: agent.name,
@@ -212,6 +214,7 @@ export const VoiceTester: React.FC<VoiceTesterProps> = ({
       onSessionSaved(saved);
     } catch (err: any) {
       console.error('Failed to save session:', err);
+      setSaveError(err.message || 'Failed to save session. Please try again.');
     } finally {
       setIsSavingSession(false);
     }
@@ -505,6 +508,13 @@ export const VoiceTester: React.FC<VoiceTesterProps> = ({
                   placeholder="Notes (e.g., Pronounced company name well, latency was fast)"
                   className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
                 />
+
+                {saveError && (
+                  <div className="flex items-start gap-2 p-2.5 rounded-lg bg-red-950/60 border border-red-800/60 text-red-300 text-xs">
+                    <AlertCircle className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
+                    <span>{saveError}</span>
+                  </div>
+                )}
 
                 <div className="flex items-center justify-between pt-1">
                   {savedSuccess ? (
